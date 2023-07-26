@@ -1,4 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose=require('mongoose');
+const opts = {
+  timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
+};
 const noteSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -11,7 +14,8 @@ const noteSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true
-    }
-},{timestamps: true});
+    },
+
+},opts);
 let Notes =mongoose.model('Notes', noteSchema);
 module.exports = Notes;
