@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const opts = {
-  timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
+  timestamps: { currentTime: () => new Date(Date.now() + (5.5 * 60 * 60 * 1000)) }
 };
 const noteSchema = new mongoose.Schema({
     user: {
@@ -16,6 +16,6 @@ const noteSchema = new mongoose.Schema({
         required: true
     },
 
-},opts);
+},{timestamps: true});
 let Notes =mongoose.model('Notes', noteSchema);
 module.exports = Notes;
