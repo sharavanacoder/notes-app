@@ -7,18 +7,15 @@ module.exports.renderRegister = (req, res, next) => {
 }
 module.exports.register = async (req, res, next) => {
   const { email, password, username } = req.body;
-  let check;
   if (!email || !password || !username) {
     req.flash("error", 'Please enter the fields!');
     return res.redirect('/signup');
   }
   try {
-    const { wellFormed, validDomain, validMailbox } = await emailValidator.verify(email);
-    if (wellFormed && validDomain && validMailbox) {
+    const { wellFormed, validDomain, validMailbox } = await emailValidator.verify(email, 100);
+    if (wellFormed && validDomain) {
       const user = new User({ email, username });
       const registerUser = await User.register(user, password);
-      console.log(registerUser);
-      console.log(wellFormed, validDomain, validMailbox);
       req.login(registerUser, err => {
         if (err) {
           req.flash('error', 'Email is already registered');
@@ -28,20 +25,17 @@ module.exports.register = async (req, res, next) => {
         return res.redirect('/show');
       })
     } else {
-      console.log(wellFormed, validDomain, validMailbox);
       req.flash('error', 'Invalid Email!!!');
       return res.redirect('/signup');
 
     }
   } catch (e) {
-    console.log(e)
     req.flash('error', 'Email already registered');
     return res.redirect('/signup');
   }
 }
 
 module.exports.renderLogin = (req, res) => {
-  console.log('login', req.isAuthenticated());
   return res.render('user/signin');
 }
 module.exports.login = async (req, res) => {
