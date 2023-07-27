@@ -1,6 +1,6 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 const opts = {
-  timestamps: { currentTime: () => new Date(Date.now() + (5.5 * 60 * 60 * 1000)) }
+    timestamps: { currentTime: () => Date.now }
 };
 const noteSchema = new mongoose.Schema({
     user: {
@@ -15,7 +15,23 @@ const noteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
-},{timestamps: true});
-let Notes =mongoose.model('Notes', noteSchema);
+    offsetCreated: {
+        type: Number,
+        required: true,
+    },
+    offsetUpdated: {
+        type: Number,
+        required: true,
+        default: NaN,
+    },
+    created: {
+        type: Date,
+        default: Date.now,
+    },
+    updated: {
+        type: Date,
+        default: Date.now,
+    }
+}, { timestamps: true });
+let Notes = mongoose.model('Notes', noteSchema);
 module.exports = Notes;
