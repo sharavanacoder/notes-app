@@ -14,7 +14,7 @@
                             <div id="collapseOne+<%=i%>" class="accordion-collapse collapse show+<%=i%>" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                 <section style="display: flex; flex-direction: column; align-items: center;">
-                                  <span>Created At: <strong><%= notes[i].createdAt.toLocaleDateString() %> <%=notes[i].createdAt.toLocaleTimeString()%></strong></span>
+                                  <span>Created At: <strong><%= notes[i].createdAt.toUTCString() %> <%=notes[i].createdAt.toLocaleTimeString()%></strong></span>
                                   <% if(notes[i].updatedAt){ %>
                                       <span>Updated At: <strong><%= notes[i].updatedAt.toLocaleDateString()%> <%= notes[i].updatedAt.toLocaleTimeString() %></strong></span> 
                                     <% } else {%>
