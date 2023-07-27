@@ -18,6 +18,7 @@ module.exports.register = async (req, res, next) => {
       const user = new User({ email, username });
       const registerUser = await User.register(user, password);
       console.log(registerUser);
+      console.log(wellFormed, validDomain, validMailbox);
       req.login(registerUser, err => {
         if (err) {
           req.flash('error', 'Email is already registered');
@@ -27,6 +28,7 @@ module.exports.register = async (req, res, next) => {
         return res.redirect('/show');
       })
     } else {
+      console.log(wellFormed, validDomain, validMailbox);
       req.flash('error', 'Invalid Email!!!');
       return res.redirect('/signup');
 
