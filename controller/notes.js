@@ -8,8 +8,8 @@ module.exports.createNote = async (req, res) => {
     const note = new Notes({ title, content });
     note.user = req.user._id;
     let now = new Date();
-    note.offsetCreated = note.date.getTimezoneOffset()
-    await note.save({ timestamps: { createdAt: true, updatedAt: false } });
+    note.offsetCreated = note.created.getTimezoneOffset()
+    await note.save();
     req.flash('success', 'Successfully created a new note!');
     res.redirect('/show');
 }
@@ -33,9 +33,9 @@ module.exports.editNote = async (req, res) => {
         note.title = title;
         note.content = content;
         let now = new Date();
-        note.offsetUpdated = now.getTimezoneOffset();
+        note.offsetUpdated = now.getTimezoneOffset().toString();
         note.updated = new Date(now);
-        await note.save({ timestamps: { createdAt: false, updatedAt: true } });
+        await note.save();
         req.flash('success', 'Successfully Note is Updated!');
         res.redirect('/show');
 
