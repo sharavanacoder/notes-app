@@ -1,8 +1,7 @@
 const User = require('../models/users');
 const passport = require('passport');
-const emailExistence = require("@stationf/email-existence");
-
-
+const EmailValidator = require('email-deep-validator');
+const emailValidator = new EmailValidator();
 module.exports.renderRegister = (req, res, next) => {
   res.render('user/register');
 }
@@ -14,20 +13,27 @@ module.exports.register = async (req, res, next) => {
     return res.redirect('/signup');
   }
   try {
-    const user = new User({ email, username });
-    const registerUser = await User.register(user, password);
-    console.log(registerUser);
-    req.login(registerUser, err => {
-      if (err) {
-        req.flash('error', 'Email is already registered');
-        return res.redirect('/signup');
-      }
-      req.flash('success', 'Welcome to Notes App!');
-      return res.redirect('/show');
-    })
+    const { wellFormed, validDomain, validMailbox } = await emailValidator.verify(email);
+    if (wellFormed && validDomain && validMailbox) {
+      const user = new User({ email, username });
+      const registerUser = await User.register(user, password);
+      console.log(registerUser);
+      req.login(registerUser, err => {
+        if (err) {
+          req.flash('error', 'Email is already registered');
+          return res.redirect('/signup');
+        }
+        req.flash('success', 'Welcome to Notes App!');
+        return res.redirect('/show');
+      })
+    } else {
+      req.flash('error', 'Invalid Email!!!');
+      return res.redirect('/signup');
+
+    }
   } catch (e) {
     console.log(e)
-    req.flash('error', 'Invalid Email!!! or already registered');
+    req.flash('error', 'Email already registered');
     return res.redirect('/signup');
   }
 }
