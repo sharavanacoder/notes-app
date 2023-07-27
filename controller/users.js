@@ -14,7 +14,6 @@ module.exports.register = async (req, res, next) => {
     return res.redirect('/signup');
   }
   try {
-    check = await emailExistence.check(email);
     const user = new User({ email, username });
     const registerUser = await User.register(user, password);
     console.log(registerUser);
