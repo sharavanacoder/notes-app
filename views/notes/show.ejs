@@ -20,13 +20,13 @@
                         <section style="display: flex; flex-direction: column; align-items: center;">
                           <span>Created At: <strong>
                               <%= new Date( notes[i].created.getTime() - ( -330 * 60000
-                                )).toLocaleTimeString({ timezone: "Asia/Kolkata" })% new Date(notes[i].created.getTime()-(330*60000)).toLocaleDateString({ timezone: "Asia/Calcutta" })>
+                                )).toLocaleTimeString({ timezone: "Asia/Kolkata" })%> <%=new Date(notes[i].created.getTime()-(330*60000)).toLocaleDateString({ timezone: "Asia/Calcutta" })>
                             %></strong></span>
 
                           <% if(notes[i].offsetUpdated.trim().length>0){ %>
                             <span>Updated At: <strong>
                                 <%= new Date(notes[i].updated.getTime()-( Number.parseInt(-330) *
-                                  60000 )).toLocaleTimeString({ timezone: "Asia/Kolkata" }) new Date(notes[i].updated.getTime()-(330*60000)).toLocaleDateString({ timezone: "Asia/Calcutta" }) %>
+                                  60000 )).toLocaleTimeString({ timezone: "Asia/Kolkata" })%> <%=new Date(notes[i].updated.getTime()-(330*60000)).toLocaleDateString({ timezone: "Asia/Calcutta" }) %>
                               </strong></span>
                             <% } else {%>
                               <span style="margin-top: 1.5rem;"></span>
