@@ -20,7 +20,7 @@
                         <section style="display: flex; flex-direction: column; align-items: center;">
                           <span>Created At: <strong>
                               <%= new Date( notes[i].created.getTime() - ( notes[i].offsetCreated * 60000
-                                )).toUTCString().slice(0,-3)%>
+                                ))%>
                             </strong></span>
 
                           <% if(notes[i].offsetUpdated.trim().length>0){ %>
