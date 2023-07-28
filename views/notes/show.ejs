@@ -19,13 +19,13 @@
                       <div class="accordion-body">
                         <section style="display: flex; flex-direction: column; align-items: center;">
                           <span>Created At: <strong>
-                              <%= new Date( notes[i].created.getTime() - ( notes[i].offsetCreated * 60000
+                              <%= new Date( notes[i].created.getTime() - ( -330 * 60000
                                 )).toLocaleTimeString({ timezone: "Asia/Kolkata" })%>
                             </strong></span>
 
                           <% if(notes[i].offsetUpdated.trim().length>0){ %>
                             <span>Updated At: <strong>
-                                <%= new Date(notes[i].updated.getTime()-( Number.parseInt(notes[i].offsetUpdated) *
+                                <%= new Date(notes[i].updated.getTime()-( Number.parseInt(-330) *
                                   60000 )).toUTCString().slice(0,-3)%>
                               </strong></span>
                             <% } else {%>
