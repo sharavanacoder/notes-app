@@ -21,7 +21,7 @@
                           <span>Created At: <strong>
                               <%= new Date( notes[i].created.getTime() - ( -330 * 60000
                                 )).toLocaleTimeString({ timezone: "Asia/Kolkata" })% new Date(notes[i].created.getTime()-(330*60000)).toLocaleDateString({ timezone: "Asia/Calcutta" })>
-                            </strong></span>
+                            %></strong></span>
 
                           <% if(notes[i].offsetUpdated.trim().length>0){ %>
                             <span>Updated At: <strong>
