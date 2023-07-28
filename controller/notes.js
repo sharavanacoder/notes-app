@@ -8,7 +8,9 @@ module.exports.createNote = async (req, res) => {
     const note = new Notes({ title, content });
     note.user = req.user._id;
     let now = new Date();
-    note.offsetCreated = note.created.getTimezoneOffset()
+    note.created=now;
+    note.offsetCreated = now.getTimezoneOffset()
+    console.log(note.now.getTimezoneOffset())
     await note.save();
     req.flash('success', 'Successfully created a new note!');
     res.redirect('/show');
