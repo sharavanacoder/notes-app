@@ -10,7 +10,7 @@ module.exports.createNote = async (req, res) => {
     let now = new Date();
     note.created=now;
     note.offsetCreated = now.getTimezoneOffset()
-    console.log(note.now.getTimezoneOffset())
+    console.log(now.getTimezoneOffset())
     await note.save();
     req.flash('success', 'Successfully created a new note!');
     res.redirect('/show');
